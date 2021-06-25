@@ -2,6 +2,7 @@ package com.liuxinchi.mumu_mall.model.dao;
 
 import com.liuxinchi.mumu_mall.model.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -20,4 +21,6 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     User selectByName(String userName);
+
+    User selectByNameAndPwd(@Param("userName") String userName, @Param("password") String password);
 }

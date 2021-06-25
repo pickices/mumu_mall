@@ -1,4 +1,4 @@
-package com.liuxinchi.mumu_mall.utils;
+package com.liuxinchi.mumu_mall.util;
 
 public class Mytest {
     public static void main(String[] args) {

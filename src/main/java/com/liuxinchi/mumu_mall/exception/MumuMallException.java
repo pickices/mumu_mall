@@ -1,5 +1,8 @@
 package com.liuxinchi.mumu_mall.exception;
 
+/**
+ * @author 拾荒老冰棍
+ */
 public class MumuMallException extends Exception{
 
     private final Integer code;

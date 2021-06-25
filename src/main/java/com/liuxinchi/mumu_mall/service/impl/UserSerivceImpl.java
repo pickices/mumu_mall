@@ -5,19 +5,17 @@ import com.liuxinchi.mumu_mall.exception.MumuMallExceptionEnum;
 import com.liuxinchi.mumu_mall.model.dao.UserMapper;
 import com.liuxinchi.mumu_mall.model.pojo.User;
 import com.liuxinchi.mumu_mall.service.UserService;
+import com.liuxinchi.mumu_mall.util.Md5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.security.NoSuchAlgorithmException;
 
 @Service
 public class UserSerivceImpl implements UserService {
 
     @Autowired
     UserMapper userMapper;
-
-    @Override
-    public User test() {
-        return userMapper.selectByPrimaryKey(1);
-    }
 
     @Override
     public void register(String userName, String password) throws MumuMallException {
@@ -27,10 +25,33 @@ public class UserSerivceImpl implements UserService {
 
         User user = new User();
         user.setUsername(userName);
-        user.setPassword(password);
+        try {
+            user.setPassword(Md5Utils.getMd5Str(password));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
         if(userMapper.insertSelective(user)==0){
             throw new MumuMallException(MumuMallExceptionEnum.INSERT_FAILED);
         }
+
+    }
+
+    @Override
+    public User login(String userName, String password) throws MumuMallException {
+        String md5Password = null;
+        try {
+            md5Password = Md5Utils.getMd5Str(password);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        User user = userMapper.selectByNameAndPwd(userName, md5Password);
+
+        if(user==null){
+            throw new MumuMallException(MumuMallExceptionEnum.WRONG_PASSWORD);
+        }
+
+        return user;
 
     }
 }

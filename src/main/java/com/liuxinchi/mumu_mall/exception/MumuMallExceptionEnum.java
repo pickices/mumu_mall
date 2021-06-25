@@ -2,6 +2,7 @@ package com.liuxinchi.mumu_mall.exception;
 
 /**
  * 描述：     异常枚举
+ * @author 拾荒老冰棍
  */
 public enum MumuMallExceptionEnum {
     NEED_USER_NAME(10001, "用户名不能为空"),

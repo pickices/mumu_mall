@@ -1,4 +1,4 @@
-package com.liuxinchi.mumu_mall.utils;
+package com.liuxinchi.mumu_mall.util;
 
 /**
  * @author 拾荒老冰棍
