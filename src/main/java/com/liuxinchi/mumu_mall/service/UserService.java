@@ -11,4 +11,8 @@ public interface UserService {
     void register(String userName, String password) throws MumuMallException;
 
     User login(String userName, String password) throws MumuMallException;
+
+    void updateUser(User user) throws MumuMallException;
+
+    boolean checkAdmin(User user);
 }

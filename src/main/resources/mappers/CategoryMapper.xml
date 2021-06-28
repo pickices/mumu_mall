@@ -19,7 +19,13 @@
     from mumu_mall_category
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <select id="selectByName" resultType="com.liuxinchi.mumu_mall.model.pojo.Category">
+    select
+    <include refid="Base_Column_List" />
+    from  mumu_mall_category
+    where name = #{name,jdbcType=INTEGER}
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from mumu_mall_category
     where id = #{id,jdbcType=INTEGER}
   </delete>

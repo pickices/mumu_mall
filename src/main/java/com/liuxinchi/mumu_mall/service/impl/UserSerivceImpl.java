@@ -54,4 +54,16 @@ public class UserSerivceImpl implements UserService {
         return user;
 
     }
+
+    @Override
+    public void updateUser(User user) throws MumuMallException {
+        if(userMapper.updateByPrimaryKeySelective(user)!=1){
+            throw new MumuMallException(MumuMallExceptionEnum.UPDATE_FAILED);
+        }
+    }
+
+    @Override
+    public boolean checkAdmin(User user){
+        return user.getRole().equals(2);
+    }
 }

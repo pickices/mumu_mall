@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  * @author 拾荒老冰棍
  */
 @Controller
-public class UserContorller {
+public class UserController {
 
     @Autowired
     UserService userService;
@@ -60,5 +60,44 @@ public class UserContorller {
             httpSession.setAttribute(Constant.MUMU_MALL_USER,user);
             return ApiRestResponse.success(user);
         }
+    }
+
+    @ResponseBody
+    @PostMapping("/user/update")
+    public ApiRestResponse updateSignature(HttpSession httpSession, @RequestParam("signature") String signature) throws MumuMallException {
+        User currentUser = (User) httpSession.getAttribute(Constant.MUMU_MALL_USER);
+        if(currentUser==null){
+            return ApiRestResponse.error(MumuMallExceptionEnum.NEED_LOGIN);
+        }
+        User user = new User();
+        user.setPersonalizedSignature(signature);
+        user.setId(currentUser.getId());
+        userService.updateUser(user);
+        return ApiRestResponse.success();
+    }
+
+    @ResponseBody
+    @PostMapping("/user/logout")
+    public ApiRestResponse logout(HttpSession httpSession) throws MumuMallException {
+        httpSession.removeAttribute(Constant.MUMU_MALL_USER);
+        return ApiRestResponse.success();
+    }
+
+    @ResponseBody
+    @PostMapping("/adminLogin")
+    public ApiRestResponse adminLogin(@RequestParam(value = "userName",required = false) String userName, @RequestParam(value = "password",required = false) String password, HttpSession httpSession) throws MumuMallException{
+        if(StringUtils.isEmpty(userName)){
+            return ApiRestResponse.error(MumuMallExceptionEnum.NEED_USER_NAME);
+        }else if(StringUtils.isEmpty(password)){
+            return ApiRestResponse.error(MumuMallExceptionEnum.NEED_PASSWORD);
+        }
+
+        User user = userService.login(userName, password);
+        if(!userService.checkAdmin(user)){
+            return ApiRestResponse.error(MumuMallExceptionEnum.NEED_ADMIN);
+        }
+        user.setPassword(null);
+        httpSession.setAttribute(Constant.MUMU_MALL_USER,user);
+        return ApiRestResponse.success(user);
     }
 }

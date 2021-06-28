@@ -11,6 +11,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @Configuration
@@ -26,7 +27,8 @@ public class SwaggerConfig {
                         apis(RequestHandlerSelectors.basePackage("com.liuxinchi.mumu_mall.controller")).
                 //过滤链接
                         paths(PathSelectors.any()).
-                        build();
+                        build().
+                        ignoredParameterTypes(HttpSession.class);
     }
 
     public ApiInfo apiInfo() {
