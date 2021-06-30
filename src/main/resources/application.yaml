@@ -3,8 +3,16 @@ spring:
     url: jdbc:mysql://10.16.68.188:3306/mumu_mall?useSSL=false&useUnicode=true&characterEncoding=UTF-8
     username: root
     password: 592295lxc
+  redis:
+    host: 10.16.68.188
+    port: 6379
+    password:
 server:
   port: 8081
 mybatis:
   mapper-locations: classpath:mappers/*.xml
   type-aliases-package: com.liuxinchi.mumu_mall.model.pojo
+
+file:
+  upload:
+    dir: C:/Users/拾荒老冰棍/IdeaProjects/mumu_mall/upload/

@@ -15,4 +15,5 @@ public interface UserService {
     void updateUser(User user) throws MumuMallException;
 
     boolean checkAdmin(User user);
+    
 }

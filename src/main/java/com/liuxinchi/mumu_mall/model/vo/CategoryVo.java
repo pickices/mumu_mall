@@ -1,8 +1,14 @@
-package com.liuxinchi.mumu_mall.model.pojo;
+package com.liuxinchi.mumu_mall.model.vo;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public class Category {
+/**
+ * @author 拾荒老冰棍
+ */
+public class CategoryVo implements Serializable {
     private Integer id;
 
     private String name;
@@ -16,6 +22,16 @@ public class Category {
     private Date createTime;
 
     private Date updateTime;
+
+    private List<CategoryVo> childCategory = new ArrayList<>();
+
+    public List<CategoryVo> getChildCategory() {
+        return childCategory;
+    }
+
+    public void setChildCategory(List<CategoryVo> childCategory) {
+        this.childCategory = childCategory;
+    }
 
     public Integer getId() {
         return id;

@@ -4,6 +4,8 @@ import com.liuxinchi.mumu_mall.model.pojo.Category;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @Mapper
 public interface CategoryMapper {
@@ -20,4 +22,8 @@ public interface CategoryMapper {
     int updateByPrimaryKey(Category record);
 
     Category selectByName(String name);
+
+    List<Category> selectList();
+
+    List<Category> selectListByParentId(Integer parentId);
 }

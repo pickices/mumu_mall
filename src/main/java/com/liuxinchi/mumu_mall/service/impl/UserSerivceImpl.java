@@ -66,4 +66,5 @@ public class UserSerivceImpl implements UserService {
     public boolean checkAdmin(User user){
         return user.getRole().equals(2);
     }
+
 }
