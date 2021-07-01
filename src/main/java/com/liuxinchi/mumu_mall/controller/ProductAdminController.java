@@ -1,5 +1,6 @@
 package com.liuxinchi.mumu_mall.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.liuxinchi.mumu_mall.common.ApiRestResponse;
 import com.liuxinchi.mumu_mall.common.Constant;
 import com.liuxinchi.mumu_mall.exception.MumuMallException;
@@ -94,4 +95,17 @@ public class ProductAdminController {
         return ApiRestResponse.success();
     }
 
+    @ResponseBody
+    @PostMapping("/admin/product/batchUpdateSellStatus")
+    public ApiRestResponse batchUpdateSellStatus(@RequestParam("ids") Integer[] ids, @RequestParam("sellStatus") Integer sellStatus) throws MumuMallException {
+        productService.batchUpdateSellStatus(ids,sellStatus);
+        return ApiRestResponse.success();
+    }
+
+    @ResponseBody
+    @PostMapping("/admin/product/list")
+    public ApiRestResponse listForAdmin(@RequestParam Integer pageNum, @RequestParam Integer pageSize){
+        PageInfo pageInfo = productService.listForAdmin(pageNum, pageSize);
+        return ApiRestResponse.success(pageInfo);
+    }
 }

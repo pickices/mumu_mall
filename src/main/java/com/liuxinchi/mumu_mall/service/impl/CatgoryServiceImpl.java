@@ -66,9 +66,6 @@ public class CatgoryServiceImpl implements CatgoryService {
     public PageInfo listForAdmin(Integer pageNum, Integer pageSize) throws MumuMallException {
         PageHelper.startPage(pageNum,pageSize,"type,order_num");
         List<Category> categoryList = categoryMapper.selectList();
-        for (Category category : categoryList) {
-            System.out.println(category);
-        }
         PageInfo pageInfo = new PageInfo(categoryList);
         return pageInfo;
     }
