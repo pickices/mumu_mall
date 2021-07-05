@@ -4,18 +4,18 @@ import com.github.pagehelper.PageInfo;
 import com.liuxinchi.mumu_mall.exception.MumuMallException;
 import com.liuxinchi.mumu_mall.model.request.AddCatgoryReq;
 import com.liuxinchi.mumu_mall.model.request.UpdateCatgoryReq;
-import com.liuxinchi.mumu_mall.model.vo.CategoryVo;
+import com.liuxinchi.mumu_mall.model.vo.CategoryVO;
 
 import java.util.List;
 
-public interface CatgoryService {
+public interface CategoryService {
     void addCategory(AddCatgoryReq addCatgoryReq) throws MumuMallException;
 
     void updateCategory(UpdateCatgoryReq updateCatgoryReq) throws MumuMallException;
 
-    void deleteCatgory(Integer id) throws MumuMallException;
+    void deleteCategory(Integer id) throws MumuMallException;
 
-    PageInfo listForAdmin(Integer pageNum, Integer pageSize) throws MumuMallException;
+    PageInfo listForAdmin(Integer pageNum, Integer pageSize);
 
-    List<CategoryVo> listForConsumer() throws MumuMallException;
+    List<CategoryVO> listForConsumer(Integer parentId);
 }

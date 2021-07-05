@@ -6,14 +6,13 @@ import com.liuxinchi.mumu_mall.common.Constant;
 import com.liuxinchi.mumu_mall.exception.MumuMallException;
 import com.liuxinchi.mumu_mall.exception.MumuMallExceptionEnum;
 import com.liuxinchi.mumu_mall.model.request.AddProductReq;
+import com.liuxinchi.mumu_mall.model.request.ProductListForConsumerReq;
 import com.liuxinchi.mumu_mall.model.request.UpdateProductReq;
 import com.liuxinchi.mumu_mall.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,10 +40,13 @@ public class ProductAdminController {
     @PostMapping("/admin/upload/file")
     public ApiRestResponse upload(HttpServletRequest httpServletRequest, @RequestParam("file") MultipartFile multipartFile){
         String originalFilename = multipartFile.getOriginalFilename();
+        if(StringUtils.isEmpty(originalFilename) || !originalFilename.contains(".")){
+            return ApiRestResponse.error(MumuMallExceptionEnum.UPLOAD_FAILED);
+        }
         String suffixName = originalFilename.substring(originalFilename.lastIndexOf("."));
 
         UUID uuid = UUID.randomUUID();
-        String newFilename = uuid.toString()+suffixName;
+        String newFilename = uuid+suffixName;
 
         File fileDirectory = new File(Constant.FILE_UPLOAD_DIR);
         File destFile = new File(Constant.FILE_UPLOAD_DIR+newFilename);
@@ -103,7 +105,7 @@ public class ProductAdminController {
     }
 
     @ResponseBody
-    @PostMapping("/admin/product/list")
+    @GetMapping("/admin/product/list")
     public ApiRestResponse listForAdmin(@RequestParam Integer pageNum, @RequestParam Integer pageSize){
         PageInfo pageInfo = productService.listForAdmin(pageNum, pageSize);
         return ApiRestResponse.success(pageInfo);

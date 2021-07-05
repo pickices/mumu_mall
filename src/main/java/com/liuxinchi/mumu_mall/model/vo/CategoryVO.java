@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @author 拾荒老冰棍
  */
-public class CategoryVo implements Serializable {
+public class CategoryVO implements Serializable {
     private Integer id;
 
     private String name;
@@ -23,13 +23,13 @@ public class CategoryVo implements Serializable {
 
     private Date updateTime;
 
-    private List<CategoryVo> childCategory = new ArrayList<>();
+    private List<CategoryVO> childCategory = new ArrayList<>();
 
-    public List<CategoryVo> getChildCategory() {
+    public List<CategoryVO> getChildCategory() {
         return childCategory;
     }
 
-    public void setChildCategory(List<CategoryVo> childCategory) {
+    public void setChildCategory(List<CategoryVO> childCategory) {
         this.childCategory = childCategory;
     }
 

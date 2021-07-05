@@ -1,8 +1,12 @@
 package com.liuxinchi.mumu_mall.model.dao;
 
 import com.liuxinchi.mumu_mall.model.pojo.Cart;
+import com.liuxinchi.mumu_mall.model.vo.CartVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @Mapper
@@ -18,4 +22,10 @@ public interface CartMapper {
     int updateByPrimaryKeySelective(Cart record);
 
     int updateByPrimaryKey(Cart record);
+
+    List<CartVO> selectList(Integer userId);
+
+    Cart selectByUserIdAndProductId(@Param("userId") Integer userId, @Param("productId") Integer productId);
+
+    int updateSelectOrNot(@Param("userId") Integer userId, @Param("productId") Integer productId, @Param("selected") Integer selected);
 }

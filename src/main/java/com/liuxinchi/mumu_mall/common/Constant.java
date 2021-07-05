@@ -15,4 +15,14 @@ public class Constant {
     public void setFileUploadDir(String fileUploadDir) {
         FILE_UPLOAD_DIR = fileUploadDir;
     }
+
+    public interface SellStatus{
+        Integer SELL = 1;
+        Integer NOT_SELL = 0;
+    }
+
+    public interface SelectedStatus{
+        Integer SELECTED = 1;
+        Integer NOT_SELECTED = 0;
+    }
 }

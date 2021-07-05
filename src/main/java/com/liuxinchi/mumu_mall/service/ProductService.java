@@ -2,7 +2,9 @@ package com.liuxinchi.mumu_mall.service;
 
 import com.github.pagehelper.PageInfo;
 import com.liuxinchi.mumu_mall.exception.MumuMallException;
+import com.liuxinchi.mumu_mall.model.pojo.Product;
 import com.liuxinchi.mumu_mall.model.request.AddProductReq;
+import com.liuxinchi.mumu_mall.model.request.ProductListForConsumerReq;
 import com.liuxinchi.mumu_mall.model.request.UpdateProductReq;
 
 public interface ProductService {
@@ -15,4 +17,8 @@ public interface ProductService {
     void batchUpdateSellStatus(Integer[] ids, Integer sellStatus) throws MumuMallException;
 
     PageInfo listForAdmin(Integer pageNum, Integer pageSize);
+
+    PageInfo listForConsumer(ProductListForConsumerReq productListForConsumerReq);
+
+    Product getDetail(Integer id);
 }

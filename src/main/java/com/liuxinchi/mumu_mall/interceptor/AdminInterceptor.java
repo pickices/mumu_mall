@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
 @Component
-public class adminInterceptor implements HandlerInterceptor {
+public class AdminInterceptor implements HandlerInterceptor {
 
     @Autowired
     UserService userService;
@@ -21,12 +21,12 @@ public class adminInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute(Constant.MUMU_MALL_USER);
+        User cureentUser = (User) session.getAttribute(Constant.MUMU_MALL_USER);
 
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
 
-        if(user==null){
+        if(cureentUser==null){
             PrintWriter printWriter = response.getWriter();
 
             printWriter.write("{\n" +
@@ -38,7 +38,7 @@ public class adminInterceptor implements HandlerInterceptor {
             printWriter.close();
             return false;
         }
-        if(!userService.checkAdmin(user)){
+        if(!userService.checkAdmin(cureentUser)){
             PrintWriter printWriter = response.getWriter();
             printWriter.write("{\n" +
                     "  \"status\": 10009,\n" +

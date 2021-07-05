@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://10.16.68.188:3306/mumu_mall?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3307/mumu_mall?useSSL=false&useUnicode=true&characterEncoding=UTF-8
     username: root
     password: 592295lxc
   redis:
@@ -15,4 +15,4 @@ mybatis:
 
 file:
   upload:
-    dir: C:/Users/拾荒老冰棍/IdeaProjects/mumu_mall/upload/
+    dir: D:\Projects\mumu_mall\upload\

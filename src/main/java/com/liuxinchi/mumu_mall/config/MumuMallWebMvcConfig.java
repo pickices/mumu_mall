@@ -1,7 +1,8 @@
 package com.liuxinchi.mumu_mall.config;
 
 import com.liuxinchi.mumu_mall.common.Constant;
-import com.liuxinchi.mumu_mall.interceptor.adminInterceptor;
+import com.liuxinchi.mumu_mall.interceptor.AdminInterceptor;
+import com.liuxinchi.mumu_mall.interceptor.ConsumerInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -15,11 +16,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class MumuMallWebMvcConfig implements WebMvcConfigurer {
 
     @Autowired
-    adminInterceptor adminInterceptor;
+    AdminInterceptor adminInterceptor;
+
+    @Autowired
+    ConsumerInterceptor consumerInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry){
         registry.addInterceptor(adminInterceptor).addPathPatterns("/admin/**");
+        registry.addInterceptor(consumerInterceptor).addPathPatterns("/cart/**");
+        registry.addInterceptor(consumerInterceptor).addPathPatterns("/order/**");
     }
 
     @Override

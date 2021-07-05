@@ -1,6 +1,7 @@
 package com.liuxinchi.mumu_mall.model.dao;
 
 import com.liuxinchi.mumu_mall.model.pojo.Product;
+import com.liuxinchi.mumu_mall.model.query.ProductListForConsumerQuery;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -27,5 +28,7 @@ public interface ProductMapper {
     int batchUpdateSellStatus(@Param(("ids")) Integer[] ids, @Param("sellStatus") Integer sellStatus);
 
     List<Product> selectListForAdmin();
+
+    List<Product> selectListForConsumer(@Param("query") ProductListForConsumerQuery productListForConsumerQuery);
 
 }

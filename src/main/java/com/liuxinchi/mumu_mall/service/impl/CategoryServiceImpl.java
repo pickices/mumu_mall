@@ -8,11 +8,10 @@ import com.liuxinchi.mumu_mall.model.dao.CategoryMapper;
 import com.liuxinchi.mumu_mall.model.pojo.Category;
 import com.liuxinchi.mumu_mall.model.request.AddCatgoryReq;
 import com.liuxinchi.mumu_mall.model.request.UpdateCatgoryReq;
-import com.liuxinchi.mumu_mall.model.vo.CategoryVo;
-import com.liuxinchi.mumu_mall.service.CatgoryService;
+import com.liuxinchi.mumu_mall.model.vo.CategoryVO;
+import com.liuxinchi.mumu_mall.service.CategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -20,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CatgoryServiceImpl implements CatgoryService {
+public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     CategoryMapper categoryMapper;
@@ -44,7 +43,7 @@ public class CatgoryServiceImpl implements CatgoryService {
 
         Category categoryOld = categoryMapper.selectByName(updateCatgoryReq.getName());
 
-        if (categoryOld!=null && categoryOld.getId()!=updateCatgoryReq.getId()) {
+        if (categoryOld!=null && !categoryOld.getId().equals(updateCatgoryReq.getId())) {
             throw new MumuMallException(MumuMallExceptionEnum.NAME_EXISTED);
         }
 
@@ -56,36 +55,36 @@ public class CatgoryServiceImpl implements CatgoryService {
     }
 
     @Override
-    public void deleteCatgory(Integer id) throws MumuMallException {
+    public void deleteCategory(Integer id) throws MumuMallException {
         if(categoryMapper.deleteByPrimaryKey(id)!=1){
             throw new MumuMallException(MumuMallExceptionEnum.DELETE_FAILED);
         }
     }
 
     @Override
-    public PageInfo listForAdmin(Integer pageNum, Integer pageSize) throws MumuMallException {
+    public PageInfo listForAdmin(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum,pageSize,"type,order_num");
         List<Category> categoryList = categoryMapper.selectList();
-        PageInfo pageInfo = new PageInfo(categoryList);
+        PageInfo pageInfo = new PageInfo<>(categoryList);
         return pageInfo;
     }
 
     @Override
-    @Cacheable(value = "listForConsumer")
-    public List<CategoryVo> listForConsumer() throws MumuMallException {
-        List<CategoryVo> categoryVoList = new ArrayList<>();
-        recursiveFindCategory(categoryVoList,0);
-        return categoryVoList;
+//    @Cacheable(value = "listForConsumer")
+    public List<CategoryVO> listForConsumer(Integer parentId) {
+        List<CategoryVO> categoryVOList = new ArrayList<>();
+        recursiveFindCategory(categoryVOList,parentId);
+        return categoryVOList;
     }
 
-    private void recursiveFindCategory(List<CategoryVo> categoryVoList, Integer parentId){
+    private void recursiveFindCategory(List<CategoryVO> categoryVOList, Integer parentId){
         List<Category> categoryList = categoryMapper.selectListByParentId(parentId);
         if(!CollectionUtils.isEmpty(categoryList)){
             for (Category category : categoryList) {
-                CategoryVo categoryVo = new CategoryVo();
+                CategoryVO categoryVo = new CategoryVO();
                 BeanUtils.copyProperties(category,categoryVo);
                 recursiveFindCategory(categoryVo.getChildCategory(),categoryVo.getId());
-                categoryVoList.add(categoryVo);
+                categoryVOList.add(categoryVo);
             }
         }
     }
