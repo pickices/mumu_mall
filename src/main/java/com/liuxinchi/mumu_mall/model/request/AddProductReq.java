@@ -28,6 +28,19 @@ public class AddProductReq {
     public AddProductReq() {
     }
 
+    @Override
+    public String toString() {
+        return "AddProductReq{" +
+                "name='" + name + '\'' +
+                ", image='" + image + '\'' +
+                ", detail='" + detail + '\'' +
+                ", categoryId=" + categoryId +
+                ", price=" + price +
+                ", stock=" + stock +
+                ", status=" + status +
+                '}';
+    }
+
     public AddProductReq(String name, String image, String detail, Integer categoryId, Integer price, Integer stock, Integer status) {
         this.name = name;
         this.image = image;

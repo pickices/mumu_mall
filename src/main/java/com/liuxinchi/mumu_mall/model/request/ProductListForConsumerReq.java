@@ -12,6 +12,17 @@ public class ProductListForConsumerReq {
 
     private Integer pageSize = 10;
 
+    @Override
+    public String toString() {
+        return "ProductListForConsumerReq{" +
+                "orderBy='" + orderBy + '\'' +
+                ", categoryId=" + categoryId +
+                ", keyword='" + keyword + '\'' +
+                ", pageNum=" + pageNum +
+                ", pageSize=" + pageSize +
+                '}';
+    }
+
     public ProductListForConsumerReq() {
     }
 

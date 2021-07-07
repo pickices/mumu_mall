@@ -4,9 +4,14 @@ import com.liuxinchi.mumu_mall.model.pojo.Order;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @Mapper
 public interface OrderMapper {
+
+    List<Order> selectListByUerId(Integer userId);
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(Order record);
@@ -18,4 +23,8 @@ public interface OrderMapper {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+
+    Order selectByOrderNo(String orderNo);
+
+    List<Order> selectListAll();
 }

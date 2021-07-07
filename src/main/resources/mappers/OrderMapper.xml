@@ -29,6 +29,25 @@
     from mumu_mall_order
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByOrderNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from mumu_mall_order
+    where order_no = #{orderNo,jdbcType=INTEGER}
+  </select>
+  <select id="selectListByUerId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from mumu_mall_order
+    where user_id = #{userId}
+    order by create_time desc
+  </select>
+  <select id="selectListAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from mumu_mall_order
+    order by create_time desc
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from mumu_mall_order
     where id = #{id,jdbcType=INTEGER}

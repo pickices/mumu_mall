@@ -27,7 +27,7 @@ public class CartServiceImpl implements CartService {
     public List<CartVO> list(Integer userId){
         List<CartVO> cartVOList = cartMapper.selectList(userId);
         for (CartVO cartVO : cartVOList) {
-            cartVO.setTotalPrice(cartVO.getPrice()*cartVO.getQuantity());
+            cartVO.setTotalPrice(cartVO.getUnitPrice()*cartVO.getQuantity());
         }
         return cartVOList;
     }

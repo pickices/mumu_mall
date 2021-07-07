@@ -2,6 +2,8 @@ package com.liuxinchi.mumu_mall.model.vo;
 
 public class CartVO {
 
+    private Integer id;
+
     private Integer productId;
 
     private Integer userId;
@@ -12,24 +14,33 @@ public class CartVO {
 
     private String productName;
 
-    private String productImage;
+    private String productImg;
 
-    private Integer price;
+    private Integer unitPrice;
 
     private Integer totalPrice;
 
     public CartVO() {
     }
 
-    public CartVO(Integer productId, Integer userId, Integer quantity, Integer selected, String productName, String productImage, Integer price, Integer totalPrice) {
+    public CartVO(Integer id, Integer productId, Integer userId, Integer quantity, Integer selected, String productName, String productImg, Integer unitPrice, Integer totalPrice) {
+        this.id = id;
         this.productId = productId;
         this.userId = userId;
         this.quantity = quantity;
         this.selected = selected;
         this.productName = productName;
-        this.productImage = productImage;
-        this.price = price;
+        this.productImg = productImg;
+        this.unitPrice = unitPrice;
         this.totalPrice = totalPrice;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getProductId() {
@@ -72,20 +83,20 @@ public class CartVO {
         this.productName = productName;
     }
 
-    public String getProductImage() {
-        return productImage;
+    public String getProductImg() {
+        return productImg;
     }
 
-    public void setProductImage(String productImage) {
-        this.productImage = productImage;
+    public void setProductImg(String productImage) {
+        this.productImg = productImage;
     }
 
-    public Integer getPrice() {
-        return price;
+    public Integer getUnitPrice() {
+        return unitPrice;
     }
 
-    public void setPrice(Integer price) {
-        this.price = price;
+    public void SetUnitPrice(Integer unitPrice) {
+        this.unitPrice = unitPrice;
     }
 
     public Integer getTotalPrice() {

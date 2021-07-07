@@ -26,6 +26,19 @@ public class UpdateProductReq {
     @Max(value = 10000,message = "商品库存不能大于10000")
     private Integer stock;
 
+    @Override
+    public String toString() {
+        return "UpdateProductReq{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", image='" + image + '\'' +
+                ", detail='" + detail + '\'' +
+                ", categoryId=" + categoryId +
+                ", price=" + price +
+                ", stock=" + stock +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

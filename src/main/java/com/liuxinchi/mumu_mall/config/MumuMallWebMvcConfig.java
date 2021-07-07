@@ -23,7 +23,7 @@ public class MumuMallWebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry){
-        registry.addInterceptor(adminInterceptor).addPathPatterns("/admin/**");
+        registry.addInterceptor(adminInterceptor).addPathPatterns("/admin/**").excludePathPatterns("/admin/index.html");
         registry.addInterceptor(consumerInterceptor).addPathPatterns("/cart/**");
         registry.addInterceptor(consumerInterceptor).addPathPatterns("/order/**");
     }
@@ -31,5 +31,6 @@ public class MumuMallWebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry){
         registry.addResourceHandler("/upload/**").addResourceLocations("file:"+ Constant.FILE_UPLOAD_DIR);
+        registry.addResourceHandler("/admin/**").addResourceLocations("classpath:/static/admin/");
     }
 }

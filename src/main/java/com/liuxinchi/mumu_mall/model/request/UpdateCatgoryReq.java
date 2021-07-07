@@ -19,6 +19,17 @@ public class UpdateCatgoryReq {
 
     private Integer orderNum;
 
+    @Override
+    public String toString() {
+        return "UpdateCatgoryReq{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type=" + type +
+                ", parentId=" + parentId +
+                ", orderNum=" + orderNum +
+                '}';
+    }
+
     public UpdateCatgoryReq(Integer id, String name, Integer type, Integer parentId, Integer orderNum) {
         this.id = id;
         this.name = name;
